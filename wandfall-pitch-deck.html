@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WandFall - Publisher Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .slide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 80px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+        }
+
+        h2 {
+            font-size: 3em;
+            margin-bottom: 40px;
+            color: #4ecdc4;
+            text-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+        }
+
+        h3 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: #ff6b6b;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #a0a0a0;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #4ecdc4;
+            box-shadow: 0 20px 40px rgba(78, 205, 196, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .bullet-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .bullet-list li {
+            margin: 15px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.2em;
+        }
+
+        .bullet-list li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: #4ecdc4;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ecdc4, #45b7d1);
+            border-radius: 4px;
+            transition: width 2s ease;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4ecdc4, #45b7d1);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 10px;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #4ecdc4;
+            transform: scale(1.3);
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 20px;
+            }
+            
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 2em; }
+            h3 { font-size: 1.5em; }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .nav-dots { display: none; }
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-dots">
+        <div class="nav-dot active" data-slide="0"></div>
+        <div class="nav-dot" data-slide="1"></div>
+        <div class="nav-dot" data-slide="2"></div>
+        <div class="nav-dot" data-slide="3"></div>
+        <div class="nav-dot" data-slide="4"></div>
+        <div class="nav-dot" data-slide="5"></div>
+         <div class="nav-dot" data-slide="6"></div> 
+       <!--   <div class="nav-dot" data-slide="7"></div> -->
+       <!--   <div class="nav-dot" data-slide="8"></div> -->
+      <!--   <div class="nav-dot" data-slide="9"></div> -->
+    </div>
+
+    <div class="slide-container">
+        <!-- Slide 1: Title -->
+        <div class="slide" id="slide-0">
+            <h1>WANDFALL</h1>
+            <p class="subtitle">A Relentless Projectile Hell Action Roguelike Experience</p>
+            <p style="font-size: 1.3em; margin-bottom: 30px;">Dodge the destruction. Harness the chaos.</p>
+            <a href="#slide-1" class="cta-button">Begin Journey</a>
+        </div>
+
+        <!-- Slide 2: Game Overview -->
+        <div class="slide" id="slide-1">
+            <h2>Game Overview</h2>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3>🎯 Genre</h3>
+                    <p>Projectile Hell Action Roguelike</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚔️ Core Loop</h3>
+                    <p>Combat → Collect → Upgrade → Ascend</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎮 Platform</h3>
+                    <p>PC with console potential</p>
+                </div>
+            </div>
+            <p style="font-size: 1.2em; margin-top: 40px; max-width: 800px;">
+                <span class="highlight">WandFall</span> combines the addictive progression of roguelikes with intense real-time combat. 
+                Players wield magical wands to battle through procedurally generated acts, collecting powerful artifacts 
+                and creating various builds which ensures that every run feels unique.
+            </p>
+        </div>
+
+        <!-- Slide 3: Key Features -->
+        <div class="slide" id="slide-2">
+            <h2>Key Features</h2>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3>🔮 Dynamic Wand System</h3>
+                    <p>Dual-wielding mechanics with unique wand combinations creating hundreds of playstyle variations</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🌟 Sigil Progression</h3>
+                    <p>Deep meta-progression system with powerful artifacts that fundamentally alter gameplay</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🏗️ Procedural Generation</h3>
+                    <p>Algorithmically generated maps with multiple node types ensuring extremely high replayability</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Advanced Combat</h3>
+                    <p>Real-time projectile-based combat with complex enemy abilities and player counters</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Adaptive Difficulty</h3>
+                    <p>AI-driven difficulty scaling that responds to player performance and preferences</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔧 Modular Architecture</h3>
+                    <p>Extensible systems built for easy content expansion</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Technical Excellence -->
+        <div class="slide" id="slide-3">
+            <h2>Technical Excellence</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>🏗️ Architecture</h3>
+                    <ul class="bullet-list">
+                        <li>Modular component-based design</li>
+                        <li>Efficient object pooling systems</li>
+                        <li>Scalable singleton managers</li>
+                        <li>Event-driven programming</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <h3>⚡ Performance</h3>
+                    <ul class="bullet-list">
+                        <li>Advanced object pooling</li>
+                        <li>Optimized particle systems</li>
+                        <li>Efficient damage calculations</li>
+                        <li>Memory-conscious design</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <h3>🔧 Tools & Systems</h3>
+                    <ul class="bullet-list">
+                        <li>Custom enemy ability editor</li>
+                        <li>Comprehensive testing framework</li>
+                        <li>Flexible stat system</li>
+                        <li>Visual effect management</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Market Opportunity -->
+        <div class="slide" id="slide-4">
+            <h2>Market Opportunity</h2>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <div class="stat-number">$2.3B</div>
+                    <p>Roguelike market size (2023)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-number">23%</div>
+                    <p>Annual growth rate</p>
+                </div>
+                <div class="feature-card">
+                    <div class="stat-number">85M+</div>
+                    <p>Active roguelike players</p>
+                </div>
+            </div>
+            <h3 style="margin-top: 50px;">Competitive Positioning</h3>
+            <ul class="bullet-list">
+                <li><span class="highlight">Risk of Rain 2:</span>Item stacking and synergies with procedural progression</li>
+                <li><span class="highlight">Hades:</span>Roguelike with permanent progression and ability combinations</li>
+                <li><span class="highlight">Dead Cells:</span>Fast-paced combat with weapon variety and meta-progression</li>
+                <li><span class="highlight">The Binding of Isaac:</span>Top-down roguelike with item synergies (like the sigils)</li>
+                <li><span class="highlight">Noita:</span>Wand crafting and spell combination mechanics</li>
+            </ul>
+            <p style="margin-top: 30px; font-size: 1.2em;">
+                <span class="highlight">This game:</span> Blends the wand-crafting of Noita with the roguelike structure of Hades and item synergy of Risk of Rain.
+            </p>
+        </div>
+
+        <!-- Slide 6: Development Progress -->
+        <div class="slide" id="slide-5">
+            <h2>Development Progress</h2>
+            <div class="content-grid">
+                <div class="feature-card">
+                    <h3>Core Systems</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85%"></div>
+                    </div>
+                    <p>85% Complete</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Combat & Abilities</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <p>75% Complete</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Progression Systems</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%"></div>
+                    </div>
+                    <p>80% Complete</p>
+                </div>
+                <div class="feature-card">
+                    <h3>UI/UX</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 50%"></div>
+                    </div>
+                    <p>50% Complete</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Audio & Polish</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 20%"></div>
+                    </div>
+                    <p>20% Complete</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Content Creation</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <p>75% Complete</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Development Roadmap -->
+        <div class="slide" id="slide-6">
+            <h2>Development Roadmap</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Q1 2025</h3>
+                    <p>Fundemental Gameplay Loop</p>
+                    <p>Core mechanics complete</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Q2 2025</h3>
+                    <p>Alpha Build</p>
+                    <p>Balancing/Testing</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>?</h3>
+                    <p></p>
+                    <p></p>
+                </div>
+                <div class="timeline-item">
+                    <h3>?</h3>
+                    <p></p>
+                    <p></p>
+                </div>
+            </div>
+            
+        </div>
+
+        
+
+        
+
+       
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navigation dots functionality
+        const navDots = document.querySelectorAll('.nav-dot');
+        const slides = document.querySelectorAll('.slide');
+
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                slides[index].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Update active nav dot on scroll
+        window.addEventListener('scroll', () => {
+            let current = 0;
+            slides.forEach((slide, index) => {
+                const rect = slide.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                    current = index;
+                }
+            });
+
+            navDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === current);
+            });
+        });
+
+        // Animate progress bars when they come into view
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.progress-fill');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 200);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        slides.forEach(slide => {
+            observer.observe(slide);
+        });
+    </script>
+</body>
+</html>
